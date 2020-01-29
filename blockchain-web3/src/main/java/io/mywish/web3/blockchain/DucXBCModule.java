@@ -19,7 +19,7 @@ import org.web3j.protocol.websocket.WebSocketClient;
 import java.net.ConnectException;
 import java.net.URI;
 
-@Component
+//@Component
 public class DucXBCModule {
     @ConditionalOnProperty(name = "io.lastwill.eventscan.ducatusx.mainnet")
     @Bean(name = NetworkType.DUCATUSX_MAINNET_VALUE)
