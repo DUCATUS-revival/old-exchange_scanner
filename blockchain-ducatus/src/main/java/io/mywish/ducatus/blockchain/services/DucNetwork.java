@@ -6,52 +6,35 @@ import io.mywish.blockchain.WrapperBlock;
 import io.mywish.blockchain.WrapperNetwork;
 import io.mywish.blockchain.WrapperTransaction;
 import io.mywish.blockchain.WrapperTransactionReceipt;
-import io.mywish.ducatus.blockchain.helper.DucBlockParser;
-import org.bitcoinj.core.NetworkParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
-import java.util.List;
 
 public class DucNetwork extends WrapperNetwork {
-    final private BtcdClient btcdClient;
+    private final BtcdClient ducClient;
 
     @Autowired
     private WrapperBlockDucService blockBuilder;
 
-    private final NetworkParameters networkParameters;
-
-    @Autowired
-    private DucBlockParser ducBlockParser;
-
-    public DucNetwork(NetworkType type, BtcdClient btcdClient, NetworkParameters networkParameters) {
+    public DucNetwork(NetworkType type, BtcdClient ducClient) {
         super(type);
-        this.btcdClient = btcdClient;
-        this.networkParameters = networkParameters;
+        this.ducClient = ducClient;
     }
 
     @Override
     public Long getLastBlock() throws Exception {
-        return btcdClient.getBlockCount().longValue();
+        return ducClient.getBlockCount().longValue();
     }
 
     @Override
     public WrapperBlock getBlock(String hash) throws Exception {
-        // TODO optimize
-        long height = btcdClient.getBlock(hash).getHeight();
-        return blockBuilder.build(
-                ducBlockParser.parse(
-                        networkParameters,
-                        (String) btcdClient.getBlock(hash, false)
-                ),
-                height,
-                networkParameters
-        );
+        long height = ducClient.getBlock(hash).getHeight();
+        return blockBuilder.build(ducClient.getBlock(hash), height);
     }
 
     @Override
     public WrapperBlock getBlock(Long number) throws Exception {
-        String hash = btcdClient.getBlockHash(number.intValue());
+        String hash = ducClient.getBlockHash(number.intValue());
         return getBlock(hash);
     }
 
@@ -63,16 +46,5 @@ public class DucNetwork extends WrapperNetwork {
     @Override
     public WrapperTransactionReceipt getTxReceipt(WrapperTransaction transaction) {
         throw new UnsupportedOperationException("Method not supported");
-    }
-
-    @Override
-    public boolean isPendingTransactionsSupported() {
-        return false;
-    }
-
-    @Override
-    public List<WrapperTransaction> fetchPendingTransactions() {
-        throw new UnsupportedOperationException("Method not supported");
-//        return Collections.emptyList();
     }
 }

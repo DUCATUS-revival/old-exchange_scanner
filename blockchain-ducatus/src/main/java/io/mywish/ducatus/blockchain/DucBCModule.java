@@ -55,9 +55,7 @@ public class DucBCModule {
                         rpc.getPort(),
                         user,
                         password
-                ),
-                treatTestnetAsMainnet ? new TestNet3Params() : new MainNetParams()
-        );
+                ));
     }
 
     @ConditionalOnProperty("etherscanner.ducatus.rpc-url.testnet")
@@ -83,8 +81,7 @@ public class DucBCModule {
                         rpc.getPort(),
                         user,
                         password
-                ),
-                new TestNet3Params());
+                ));
     }
 
     @Configuration
