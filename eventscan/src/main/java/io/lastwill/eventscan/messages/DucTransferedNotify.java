@@ -1,5 +1,10 @@
 package io.lastwill.eventscan.messages;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString(callSuper = true)
 public class DucTransferedNotify extends BaseNotify {
     private final String ducAddress;
     private final long transferId;
