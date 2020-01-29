@@ -9,7 +9,7 @@ public class TransferConfirmEvent extends BaseEvent {
     private final String tx_hash;
     private final long transferId;
     private final String ducAddress;
-    private final String type = "transfered";
+    private final String type = "transferred";
     private final boolean isSuccess;
 
     public TransferConfirmEvent(DucatusTransfer ducatusTransfer) {
