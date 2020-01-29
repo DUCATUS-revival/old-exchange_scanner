@@ -63,15 +63,4 @@ public class BtcNetwork extends WrapperNetwork {
     public WrapperTransactionReceipt getTxReceipt(WrapperTransaction transaction) {
         throw new UnsupportedOperationException("Method not supported");
     }
-
-    @Override
-    public boolean isPendingTransactionsSupported() {
-        return false;
-    }
-
-    @Override
-    public List<WrapperTransaction> fetchPendingTransactions() {
-        throw new UnsupportedOperationException("Method not supported");
-//        return Collections.emptyList();
-    }
 }

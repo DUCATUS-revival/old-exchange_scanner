@@ -42,8 +42,4 @@ public abstract class WrapperNetwork {
             }
         });
     }
-
-    public abstract boolean isPendingTransactionsSupported();
-    public abstract List<WrapperTransaction> fetchPendingTransactions() throws Exception;
-//    public abstract boolean getExternalId(String address);
 }

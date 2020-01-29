@@ -154,22 +154,4 @@ public class Web3Network extends WrapperNetwork {
             return getTxReceipt(transaction);
         }
     }
-
-    @Override
-    public boolean isPendingTransactionsSupported() {
-        return true;
-    }
-
-    @Override
-    public List<WrapperTransaction> fetchPendingTransactions() throws Exception {
-        if (pendingTransactions.isEmpty()) {
-            return Collections.emptyList();
-        }
-        ArrayList<WrapperTransaction> result = new ArrayList<>(pendingTransactions.size() + 3);
-        while (!pendingTransactions.isEmpty()) {
-            Transaction transaction = pendingTransactions.remove();
-            result.add(transactionBuilder.build(transaction));
-        }
-        return result;
-    }
 }
