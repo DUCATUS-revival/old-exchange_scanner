@@ -27,8 +27,7 @@ public class BalanceEventDispatcher {
                             PaymentStatus.COMMITTED,
                             event.getTransaction().getHash(),
                             event.getCurrency(),
-                            event.isSuccess(),
-                            event.getUserAddressExchange().getId())
+                            event.isSuccess())
             );
         }
         catch (Throwable e) {
