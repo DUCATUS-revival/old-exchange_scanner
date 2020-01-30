@@ -14,13 +14,4 @@ public interface UserAddressExchangeRepository extends CrudRepository<UserAddres
 
     @Query("select c from UserAddressExchange c where c.btcAddress in :addresses")
     List<UserAddressExchange> findByBtcAddressesList(@Param("addresses") Collection<String> addresses);
-
-    @Query("select c from UserAddressExchange c where c.ducAddress in :addresses")
-    List<UserAddressExchange> findByDucAddressesList(@Param("addresses") Collection<String> addresses);
-
-    @Query("select c from UserAddressExchange c where c.ethAddress = :address")
-    UserAddressExchange findByEthAddress(@Param("address") String internalAddress);
-
-    @Query("select c from UserAddressExchange c where c.ducAddress = :address")
-    UserAddressExchange findByDucAddress(@Param("address") String internalAddress);
 }
