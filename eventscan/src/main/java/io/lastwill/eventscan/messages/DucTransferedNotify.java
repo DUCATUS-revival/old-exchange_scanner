@@ -19,6 +19,6 @@ public class DucTransferedNotify extends BaseNotify {
 
     @Override
     public String getType() {
-        return "transfered";
+        return "transferred";
     }
 }
